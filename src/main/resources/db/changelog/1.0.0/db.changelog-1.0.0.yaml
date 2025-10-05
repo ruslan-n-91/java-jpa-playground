@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - include:
+      file: 001-create-orders-items-tables.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: static-data-insert/insert-into-orders-items-tables.sql
+      relativeToChangelogFile: true

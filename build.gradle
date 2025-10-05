@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.6'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.liquibase.gradle' version '2.2.2'
+}
+
+group = 'com.example'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+ext {
+    mapstructVersion = "1.6.3"
+    springCloudVersion = "2025.0.0"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    runtimeOnly 'org.postgresql:postgresql'
+
+    implementation 'org.liquibase:liquibase-core'
+    liquibaseRuntime 'org.liquibase:liquibase-core'
+    liquibaseRuntime 'org.postgresql:postgresql'
+    liquibaseRuntime 'info.picocli:picocli:4.7.5'
+
+    implementation "org.mapstruct:mapstruct:$mapstructVersion"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+liquibase {
+    activities {
+        main {
+            File propertyFile = new File("src/main/resources/liquibase.properties")
+            Properties properties = new Properties()
+            properties.load(new FileInputStream(propertyFile))
+            changeLogFile "${properties.changeLogFile}"
+            url "${properties.url}"
+            username "${properties.username}"
+            password "${properties.password}"
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
