@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedAttributeNode;
 import jakarta.persistence.NamedEntityGraph;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -33,7 +34,9 @@ import java.util.Set;
         attributeNodes = {
                 @NamedAttributeNode("client"),
                 @NamedAttributeNode("document"),
-                @NamedAttributeNode(value = "items")
+                @NamedAttributeNode(value = "items"),
+                @NamedAttributeNode(value = "workers"),
+                @NamedAttributeNode(value = "specialDocuments")
         }
 )
 @Data
@@ -66,9 +69,9 @@ public class Order {
     @Column(name = "created_at")
     private Instant createdAt;
 
-    //    @ManyToMany(fetch = FetchType.EAGER)
+    //@ManyToMany(fetch = FetchType.EAGER)
     @ManyToMany
-//    @Fetch(FetchMode.JOIN)
+    //@Fetch(FetchMode.JOIN)
     @JoinTable(
             name = "orders_items",
             joinColumns = @JoinColumn(name = "order_id"),
@@ -78,21 +81,41 @@ public class Order {
     @JsonIgnore
     private Set<Item> items;
 
-    //    @ManyToOne(fetch = FetchType.EAGER)
+    //@ManyToOne(fetch = FetchType.EAGER)
     @ManyToOne
-//    @Fetch(FetchMode.JOIN)
+    //@Fetch(FetchMode.JOIN)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @JsonIgnore
     private Client client;
 
-    //    @OneToOne(fetch = FetchType.EAGER)
+    //@OneToOne(fetch = FetchType.EAGER)
     @OneToOne
-//    @Fetch(FetchMode.JOIN)
+    //@Fetch(FetchMode.JOIN)
     @JoinColumn(name = "document_id", referencedColumnName = "id")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @JsonIgnore
     private Document document;
+
+    //@ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
+    //@Fetch(FetchMode.JOIN)
+    @JoinTable(
+            name = "orders_workers",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "worker_id"))
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore
+    private Set<Worker> workers;
+
+    //@OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order")
+    //@Fetch(FetchMode.JOIN)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore
+    private Set<SpecialDocument> specialDocuments;
 }

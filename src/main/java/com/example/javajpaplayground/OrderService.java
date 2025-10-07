@@ -21,6 +21,7 @@ public class OrderService {
     public List<OrderResponseDto> findAll() {
 //        List<Order> orders = orderRepository.findAllOrdersJPQL();
         List<Order> orders = orderRepository.findAllOrdersEntityGraph();
+//        List<Order> orders = orderRepository.findAll();
         return orders.stream()
                 .map(orderMapper::toOrderResponseDto)
                 .toList();

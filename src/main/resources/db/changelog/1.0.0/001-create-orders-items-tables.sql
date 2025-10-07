@@ -1,15 +1,20 @@
 --liquibase formatted sql
 --changeset Ruslan Nurnazarov:create_orders_items_clients_documents_tables
 
---rollback DROP TABLE orders_items; DROP TABLE orders; DROP TABLE items;
---rollback DROP TABLE clients; DROP TABLE documents;
+--rollback DROP TABLE orders_items; DROP TABLE orders_workers;
+--rollback DROP TABLE special_documents; DROP TABLE orders;
+--rollback DROP TABLE items; DROP TABLE documents;
+--rollback DROP TABLE workers; DROP TABLE clients;
 --rollback DROP SEQUENCE orders_id_seq; DROP SEQUENCE items_id_seq;
 --rollback DROP SEQUENCE clients_id_seq; DROP SEQUENCE documents_id_seq;
+--rollback DROP SEQUENCE workers_id_seq; DROP SEQUENCE special_documents_id_seq;
 
 CREATE SEQUENCE IF NOT EXISTS orders_id_seq INCREMENT BY 50 START WITH 100;
 CREATE SEQUENCE IF NOT EXISTS items_id_seq INCREMENT BY 50 START WITH 100;
 CREATE SEQUENCE IF NOT EXISTS clients_id_seq INCREMENT BY 50 START WITH 100;
 CREATE SEQUENCE IF NOT EXISTS documents_id_seq INCREMENT BY 50 START WITH 100;
+CREATE SEQUENCE IF NOT EXISTS special_documents_id_seq INCREMENT BY 50 START WITH 100;
+CREATE SEQUENCE IF NOT EXISTS workers_id_seq INCREMENT BY 50 START WITH 100;
 
 CREATE TABLE IF NOT EXISTS clients
 (
@@ -57,5 +62,31 @@ CREATE TABLE IF NOT EXISTS orders_items
     CONSTRAINT fk_items FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS workers
+(
+    id              BIGINT DEFAULT nextval('workers_id_seq') PRIMARY KEY,
+    first_name      VARCHAR(255),
+    second_name     VARCHAR(255),
+    passport_number VARCHAR(255),
+    birth_date      DATE
+);
 
+CREATE TABLE IF NOT EXISTS orders_workers
+(
+    order_id  BIGINT NOT NULL,
+    worker_id BIGINT NOT NULL,
+    PRIMARY KEY (order_id, worker_id),
+    CONSTRAINT fk_orders FOREIGN KEY (order_id) REFERENCES orders (id) ON DELETE CASCADE,
+    CONSTRAINT fk_workers FOREIGN KEY (worker_id) REFERENCES workers (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS special_documents
+(
+    id              BIGINT DEFAULT nextval('special_documents_id_seq') PRIMARY KEY,
+    document_number VARCHAR(255),
+    document_type   VARCHAR(255),
+    created_at      TIMESTAMP,
+    order_id        BIGINT,
+    CONSTRAINT fk_orders FOREIGN KEY (order_id) REFERENCES orders (id) ON DELETE SET NULL
+);
 

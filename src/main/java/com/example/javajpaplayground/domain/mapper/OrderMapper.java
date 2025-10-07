@@ -6,7 +6,8 @@ import org.mapstruct.Mapper;
 
 import java.util.Set;
 
-@Mapper(componentModel = "spring", uses = {ItemMapper.class, ClientMapper.class, DocumentMapper.class})
+@Mapper(componentModel = "spring",
+        uses = {ItemMapper.class, ClientMapper.class, DocumentMapper.class, WorkerMapper.class, SpecialDocumentMapper.class})
 public interface OrderMapper {
 
     OrderResponseDto toOrderResponseDto(Order order);

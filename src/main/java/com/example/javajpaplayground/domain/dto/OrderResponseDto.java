@@ -10,6 +10,8 @@ public record OrderResponseDto(
         Instant createdAt,
         List<ItemResponseDto> items,
         ClientResponseDto client,
-        DocumentResponseDto document
+        DocumentResponseDto document,
+        List<WorkerResponseDto> workers,
+        List<SpecialDocumentResponseDto> specialDocuments
 ) {
 }
