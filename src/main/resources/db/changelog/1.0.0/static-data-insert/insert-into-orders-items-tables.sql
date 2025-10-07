@@ -21,10 +21,10 @@ VALUES (1, '2200001', 'DOCUMENT', '2025-10-04 17:57:00'),
 
 INSERT INTO orders (id, order_number, status, created_at, client_id, document_id)
 VALUES (1, 'ORD-100001', 'PROCESSING', '2025-10-04 16:47:00', 1, 1),
-       (2, 'ORD-100002', 'PROCESSING', '2025-10-04 16:47:00', 2, 2),
-       (3, 'ORD-100003', 'PROCESSING', '2025-10-04 16:47:00', 3, 3),
+       (2, 'ORD-100002', 'DONE', '2025-10-04 16:47:00', 2, 2),
+       (3, 'ORD-100003', 'DELIVERY', '2025-10-04 16:47:00', 3, 3),
        (4, 'ORD-100004', 'PROCESSING', '2025-10-04 16:47:00', 4, 4),
-       (5, 'ORD-100005', 'PROCESSING', '2025-10-04 16:47:00', 5, 5);
+       (5, 'ORD-100005', 'PREPARING', '2025-10-04 16:47:00', 5, 5);
 --(nextval('orders_id_seq'), 'ORD-100005', 'PROCESSING', '2025-10-04 16:47:00');
 
 INSERT INTO items (id, item_number, name, description)
@@ -47,17 +47,17 @@ VALUES (1, 'Worker1', '111', '5556661111', '1981-05-07'),
        (5, 'Worker5', '555', '5552225555', '1973-12-25');
 
 INSERT INTO special_documents (id, document_number, document_type, created_at, order_id)
-VALUES (1, '5500001', 'DOCUMENT', '2025-10-04 17:57:00', 1),
-       (2, '5500002', 'DOCUMENT', '2025-10-04 17:57:00', 1),
-       (3, '5500003', 'DOCUMENT', '2025-10-04 17:57:00', 1),
-       (4, '5500004', 'DOCUMENT', '2025-10-04 17:57:00', 2),
-       (5, '5500004', 'DOCUMENT', '2025-10-04 17:57:00', 2),
-       (6, '5500004', 'DOCUMENT', '2025-10-04 17:57:00', 3),
-       (7, '5500004', 'DOCUMENT', '2025-10-04 17:57:00', 3),
-       (8, '5500004', 'DOCUMENT', '2025-10-04 17:57:00', 4),
-       (9, '5500004', 'DOCUMENT', '2025-10-04 17:57:00', 4),
-       (10, '5500004', 'DOCUMENT', '2025-10-04 17:57:00', 5),
-       (11, '5500005', 'DOCUMENT', '2025-10-04 17:57:00', 5);
+VALUES (1, '5500001', 'SPECIAL DOCUMENT', '2025-10-04 17:57:00', 1),
+       (2, '5500002', 'SPECIAL DOCUMENT', '2025-10-04 17:57:00', 1),
+       (3, '5500003', 'SPECIAL DOCUMENT', '2025-10-04 17:57:00', 1),
+       (4, '5500004', 'SPECIAL DOCUMENT', '2025-10-04 17:57:00', 2),
+       (5, '5500004', 'SPECIAL DOCUMENT', '2025-10-04 17:57:00', 2),
+       (6, '5500004', 'SPECIAL DOCUMENT', '2025-10-04 17:57:00', 3),
+       (7, '5500004', 'SPECIAL DOCUMENT', '2025-10-04 17:57:00', 3),
+       (8, '5500004', 'SPECIAL DOCUMENT', '2025-10-04 17:57:00', 4),
+       (9, '5500004', 'SPECIAL DOCUMENT', '2025-10-04 17:57:00', 4),
+       (10, '5500004', 'SPECIAL DOCUMENT', '2025-10-04 17:57:00', 5),
+       (11, '5500005', 'SPECIAL DOCUMENT', '2025-10-04 17:57:00', 5);
 
 INSERT INTO orders_workers (order_id, worker_id)
 VALUES (1, 1),

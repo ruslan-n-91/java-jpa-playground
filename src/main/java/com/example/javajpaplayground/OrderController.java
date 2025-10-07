@@ -20,4 +20,9 @@ public class OrderController {
     public ResponseEntity<List<OrderResponseDto>> findAll() {
         return ResponseEntity.ok(orderService.findAll());
     }
+
+    @GetMapping("/filters")
+    public ResponseEntity<List<OrderResponseDto>> findAllFiltered() {
+        return ResponseEntity.ok(orderService.findAllFiltered());
+    }
 }
