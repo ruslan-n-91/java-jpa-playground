@@ -21,7 +21,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-#        generate_statistics: true
+        #        generate_statistics: true
         session.events.log.LOG_QUERIES_SLOWER_THAN_MS: 10
   liquibase:
     enabled: true
@@ -29,7 +29,7 @@ spring:
 
 logging:
   level:
-    com.example.javajpaplayground: debug
+#    com.example.javajpaplayground: debug
     org.springframework.web.servlet.DispatcherServlet: debug
 #    org.springframework.orm.jpa: info
 #    org.springframework.orm.jpa.JpaTransactionManager: debug
@@ -37,4 +37,5 @@ logging:
 #    org.springframework.transaction.interceptor: trace
 #    org.springframework.hibernate.stat: debug
 #    org.springframework.hibernate.cache: debug
+#    org.hibernate.type.descriptor.sql.BasicBinder: trace
     org.hibernate.orm.jdbc.bind: trace

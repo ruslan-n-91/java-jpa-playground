@@ -18,14 +18,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
            "LEFT JOIN FETCH o.workers " +
            "LEFT JOIN FETCH o.items")
     /*
-    ??? ВСЕ НОРМ РАБОТАЕТ
-    При одновременной загрузке нескольких коллекций (например, @OneToMany или @ManyToMany)
+    При одновременной загрузке нескольких коллекций (например, @OneToMany или @ManyToMany) из нескольких сущностей
     в одном JPQL-запросе Hibernate выбрасывает org.hibernate.loader.MultipleBagFetchException.
-    Поскольку поле items является коллекцией (@ManyToMany), а @OneToMany-коллекций в Order нет,
-    в данном конкретном случае запрос будет работать. Однако если добавить еще одну коллекцию в Order
-    и попытаться загрузить ее в этом же запросе, возникнет ошибка.
-    Чтобы это исправить можно использовать Entity Graph.
-    ??? ВСЕ НОРМ РАБОТАЕТ
+    Также стоит не забывать про Cartesian Product Problem.
      */
     List<Order> findAllOrdersJPQL();
 
