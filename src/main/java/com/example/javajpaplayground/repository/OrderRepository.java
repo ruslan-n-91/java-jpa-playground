@@ -18,7 +18,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
            "LEFT JOIN FETCH o.workers " +
            "LEFT JOIN FETCH o.items")
     /*
-    При одновременной загрузке нескольких коллекций (например, @OneToMany или @ManyToMany) из нескольких сущностей
+    При одновременной загрузке нескольких коллекций (например, @OneToMany или @ManyToMany)
     в одном JPQL-запросе Hibernate выбрасывает org.hibernate.loader.MultipleBagFetchException.
     Также стоит не забывать про Cartesian Product Problem.
      */
