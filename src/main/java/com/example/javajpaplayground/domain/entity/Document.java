@@ -16,6 +16,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.time.Instant;
 
@@ -50,6 +52,7 @@ public class Document {
     private Instant createdAt;
 
     @OneToOne(mappedBy = "document", fetch = FetchType.LAZY)
+//    @Fetch(FetchMode.JOIN)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @JsonIgnore
