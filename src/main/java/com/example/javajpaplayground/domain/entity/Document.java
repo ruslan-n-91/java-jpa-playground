@@ -51,7 +51,8 @@ public class Document {
     @Column(name = "created_at")
     private Instant createdAt;
 
-    @OneToOne(mappedBy = "document", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "document")
+//    @OneToOne(mappedBy = "document", fetch = FetchType.LAZY)
 //    @Fetch(FetchMode.JOIN)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

@@ -55,7 +55,8 @@ public class Client {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "client")
+//    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
 //    @Fetch(FetchMode.JOIN)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

@@ -35,8 +35,8 @@ public class OrderService {
     @Transactional
     public List<OrderResponseDto> findAll() {
 //        List<Order> orders = orderRepository.findAllOrdersJPQL();
-        List<Order> orders = orderRepository.findAllOrdersEntityGraph();
-//        List<Order> orders = orderRepository.findAll();
+//        List<Order> orders = orderRepository.findAllOrdersEntityGraph();
+        List<Order> orders = orderRepository.findAll();
 
         /// ///// CARTESIAN PRODUCT PROBLEM TEST
         String sql = "select\n" +
@@ -97,6 +97,8 @@ public class OrderService {
         System.out.println("LIST TUPLES " + list);
         list.forEach(tuple -> System.out.println("tuple " + tuple));
         /// ///// CARTESIAN PRODUCT PROBLEM TEST
+
+        System.out.println("MAPPERS AFTER THIS");
 
         return orders.stream()
                 .map(orderMapper::toOrderResponseDto)

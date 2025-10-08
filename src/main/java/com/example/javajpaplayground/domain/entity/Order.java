@@ -69,6 +69,24 @@ public class Order {
     @Column(name = "created_at")
     private Instant createdAt;
 
+//    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
+//    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "document_id", referencedColumnName = "id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore
+    private Document document;
+
+//    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
+//    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore
+    private Client client;
+
 //    @ManyToMany(fetch = FetchType.EAGER)
     @ManyToMany
 //    @Fetch(FetchMode.JOIN)
@@ -80,24 +98,6 @@ public class Order {
     @EqualsAndHashCode.Exclude
     @JsonIgnore
     private Set<Item> items;
-
-//    @ManyToOne(fetch = FetchType.EAGER)
-    @ManyToOne
-//    @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @JsonIgnore
-    private Client client;
-
-//    @OneToOne(fetch = FetchType.EAGER)
-    @OneToOne
-//    @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "document_id", referencedColumnName = "id")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @JsonIgnore
-    private Document document;
 
 //    @ManyToMany(fetch = FetchType.EAGER)
     @ManyToMany

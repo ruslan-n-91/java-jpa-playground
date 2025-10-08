@@ -3,6 +3,7 @@ package com.example.javajpaplayground.domain.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -50,6 +51,7 @@ public class SpecialDocument {
     private Instant createdAt;
 
     @ManyToOne
+//    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
