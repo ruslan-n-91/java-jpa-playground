@@ -23,6 +23,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -69,7 +70,7 @@ public class Order {
     @Column(name = "created_at")
     private Instant createdAt;
 
-//    @OneToOne(fetch = FetchType.EAGER)
+    //    @OneToOne(fetch = FetchType.EAGER)
     @OneToOne
 //    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "document_id", referencedColumnName = "id")
@@ -78,7 +79,7 @@ public class Order {
     @JsonIgnore
     private Document document;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
+    //    @ManyToOne(fetch = FetchType.EAGER)
     @ManyToOne
 //    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
@@ -87,9 +88,11 @@ public class Order {
     @JsonIgnore
     private Client client;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
+    //    @ManyToMany(fetch = FetchType.EAGER)
     @ManyToMany
 //    @Fetch(FetchMode.JOIN)
+//    @Fetch(FetchMode.SUBSELECT)
+//    @BatchSize(size = 50)
     @JoinTable(
             name = "orders_items",
             joinColumns = @JoinColumn(name = "order_id"),
@@ -99,9 +102,11 @@ public class Order {
     @JsonIgnore
     private Set<Item> items;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
+    //    @ManyToMany(fetch = FetchType.EAGER)
     @ManyToMany
 //    @Fetch(FetchMode.JOIN)
+//    @Fetch(FetchMode.SUBSELECT)
+//    @BatchSize(size = 50)
     @JoinTable(
             name = "orders_workers",
             joinColumns = @JoinColumn(name = "order_id"),
@@ -111,9 +116,11 @@ public class Order {
     @JsonIgnore
     private Set<Worker> workers;
 
-//    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    //    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     @OneToMany(mappedBy = "order")
 //    @Fetch(FetchMode.JOIN)
+//    @Fetch(FetchMode.SUBSELECT)
+//    @BatchSize(size = 50)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @JsonIgnore
