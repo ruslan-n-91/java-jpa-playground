@@ -28,4 +28,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 //    @EntityGraph(attributePaths = {"client", "document", "items", "workers", "specialDocuments"}, type = EntityGraph.EntityGraphType.FETCH)
     @Query("SELECT o FROM Order o")
     List<Order> findAllOrdersEntityGraph();
+
+    @EntityGraph(attributePaths = {"client", "document"}, type = EntityGraph.EntityGraphType.FETCH)
+    @Query("SELECT o FROM Order o")
+    List<Order> findAllOrdersEntityGraphToOneFields();
 }
