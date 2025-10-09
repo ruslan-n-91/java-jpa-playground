@@ -36,8 +36,9 @@ public class OrderService {
     public List<OrderResponseDto> findAll() {
 //        List<Order> orders = orderRepository.findAllOrdersJPQL();
 //        List<Order> orders = orderRepository.findAllOrdersEntityGraph();
-//        List<Order> orders = orderRepository.findAll();
-        List<Order> orders = orderRepository.findAllOrdersEntityGraphToOneFields();
+        List<Order> orders = orderRepository.findAll();
+//        List<Order> orders = orderRepository.findAllOrdersEntityGraphToOneFields();
+//        List<Order> orders = List.of(orderRepository.findById(1L).get());
 
         /// ///// CARTESIAN PRODUCT PROBLEM TEST
         String sql = "select\n" +
