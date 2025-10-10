@@ -13,6 +13,8 @@ spring:
     password: ${DATASOURCE_PASSWORD}
     hikari:
       auto-commit: false
+      #auto-commit: true
+      register-mbeans: true
   jpa:
     open-in-view: false
     #open-in-view: true
@@ -45,3 +47,5 @@ logging:
     org.hibernate.type: debug
     org.hibernate.jdbc: debug
     net.ttddyy.dsproxy.listener: debug
+    #com.zaxxer.hikari.HikariConfig: debug
+    #com.zaxxer.hikari: trace

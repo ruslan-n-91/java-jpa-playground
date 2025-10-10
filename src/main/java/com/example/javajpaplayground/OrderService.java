@@ -33,6 +33,9 @@ public class OrderService {
     private final List<Filter> filters;
 
     @Transactional
+    //@Transactional(readOnly = true, isolation = Isolation.SERIALIZABLE)
+    /// ПРИ readonly = true ИЛИ isolation = НЕ РАВНЫЙ Isolation.DEFAULT ORM ВОЗЬМЕТ СОЕДИНЕНИЕ ИЗ ПУЛА
+    /// ПРЯМО В НАЧАЛЕ РАБОТЫ МЕТОДА ДО ОБРАЩЕНИЙ К БД, А НЕ КАК ОБЫЧНО ТОЛЬКО ПРИ ПЕРВОМ ОБРАЩЕНИИ
     public List<OrderResponseDto> findAll() {
 //        List<Order> orders = orderRepository.findAllOrdersJPQL();
 //        List<Order> orders = orderRepository.findAllOrdersEntityGraph();
